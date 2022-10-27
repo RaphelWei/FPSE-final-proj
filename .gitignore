@@ -3,3 +3,7 @@ _build/
 
 # Bisect coverage files
 _coverage/
+
+# auxiliary files
+.vscode
+.DS_Store
