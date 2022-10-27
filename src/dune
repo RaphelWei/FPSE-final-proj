@@ -1,0 +1,15 @@
+(library
+  (name xiangqi)
+  (modules
+    board)
+  (libraries
+    core))
+
+(executable
+  (name main)
+  (modules main)
+  (libraries
+    core
+    board))
+
+

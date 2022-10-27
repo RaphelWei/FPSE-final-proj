@@ -1,0 +1,9 @@
+(rule
+  (target finalproj.zip)
+  (deps
+    src/main.ml
+    src/board.ml
+    src/dune
+  )
+  (action
+    (run zip -R finalproj.zip %{deps})))

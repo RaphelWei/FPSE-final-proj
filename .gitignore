@@ -1,0 +1,5 @@
+# dune build working directory
+_build/
+
+# Bisect coverage files
+_coverage/
