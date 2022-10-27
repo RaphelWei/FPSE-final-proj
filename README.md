@@ -17,3 +17,7 @@
 + Sihan Wei
 + Yilin Chen
 + Jiarui Wang
+
+## Acknowledgement
+
++ Xiangqi pieces and board are from [Wj654cj86's work](https://commons.wikimedia.org/wiki/Category:Xiangqi_pieces).

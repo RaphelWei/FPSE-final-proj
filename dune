@@ -3,6 +3,7 @@
   (deps
     src/main.ml
     src/board.ml
+    src/piece.ml
     src/dune
   )
   (action

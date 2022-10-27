@@ -1,7 +1,8 @@
 (library
   (name xiangqi)
   (modules
-    board)
+    board
+    piece)
   (libraries
     core))
 
