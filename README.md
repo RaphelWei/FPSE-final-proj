@@ -4,10 +4,10 @@
 
 [Xiangqi](https://en.wikipedia.org/wiki/Xiangqi), also known as Chinese Chess, is one of the most popular board games in China.
 
-<figure align="center">
-    <img src="./img/example.png" alt="xiangqi" width="50%" height="50%">
-    <figcaption>Xiangqi (Chinese Chess)</figcaption>
-</figure>
+<p align="center">
+<img src="./img/example.png" alt="xiangqi" width="50%" height="50%">
+</p>
+
 
 ## Requirements
 
