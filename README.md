@@ -4,9 +4,8 @@
 
 [Xiangqi](https://en.wikipedia.org/wiki/Xiangqi), also known as Chinese Chess, is one of the most popular board games in China.
 
-<p align="center">
-<img src="./img/example.png" alt="xiangqi" width="50%" height="50%">
-</p>
+This project is a simple implementation of *Xiangqi* in OCaml. It is a final project for the course [Functional Programming in Software Engineering](https://pl.cs.jhu.edu/fpse/index.html) at the Johns Hopkins University.
+
 
 
 ## Requirements
