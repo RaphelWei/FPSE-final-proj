@@ -1,19 +1,22 @@
-type piece_type = 
-  | King        (* 将 *)
-  | Guard       (* 仕 *)     
-  | Bishop      (* 象 *)
-  | Knight      (* 馬 *)
-  | Rook        (* 車 *)
-  | Cannon      (* 砲 *)
-  | Pawn        (* 卒 *)
+type rank = 
+  | General        (* 帥/將 *)
+  | Advisor        (* 仕/士 *)     
+  | Elephant       (* 相/象 *)
+  | Horse          (* 傌/馬 *)
+  | Chariot        (* 俥/車 *)
+  | Cannon         (* 炮/砲 *)
+  | Soldier        (* 兵/卒 *)
 
 type color = 
   | Red
   | Black
 
+type position = int * int
+
 type t = {
-  piece_type : piece_type;
+  id : rank;
   color : color;
+  coord : position;
 }
 
 
