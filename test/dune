@@ -1,0 +1,4 @@
+(test
+ (name Chess)
+ (libraries libgame ounit2)
+)

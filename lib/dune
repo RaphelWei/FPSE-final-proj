@@ -1,0 +1,5 @@
+(library
+ (name libgame)
+ (modules game css html utils)
+ (libraries core)
+)

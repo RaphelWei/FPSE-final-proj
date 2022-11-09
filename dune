@@ -1,10 +1,4 @@
-(rule
-  (target finalproj.zip)
-  (deps
-    src/main.ml
-    src/board.ml
-    src/piece.ml
-    src/dune
-  )
-  (action
-    (run zip -R finalproj.zip %{deps})))
+(executable
+ (name main)
+ (modules main)
+ (libraries libgame dream))
