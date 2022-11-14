@@ -1,3 +1,3 @@
-open Game
+open Game_logic
 
-val build_html_from_board : ((stone_type * color) list list) -> string
+val html_from_board : (piece list list) -> string;;
