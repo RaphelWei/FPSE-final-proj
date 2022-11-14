@@ -1,30 +1,15 @@
-type color = 
-  | Red
-  | Black
-  | N
+type game = {
+  board : Game_logic.piece list list;
+  turn : Game_logic.color (* turn=N only when the game has ended *)
+};;
+
+type move_result = 
+  | Moved of (game, string) result
+  | BlackWin of game
+  | RedWin of game
 ;;
 
-type stone_type = 
-  | Che 
-  | Ma
-  | Xiang 
-  | Shi
-  | Jiang
-  | Pao
-  | Zu
-  | Empty
-;;
 
-type stone 
+val init_game : unit -> game;;
 
-(* val valid_moves : (stone list list) -> (int * int) -> (int * int) -> (int * int) list *)
-
-val init_board : unit -> (stone_type * color) list list
-
-val get_piece_str : (stone_type * color) -> string
-
-val get_piece_color : (stone_type * color) -> string
-
-val move_valid_aux : (stone_type * color) list list -> bool
-
-val move_valid : (stone_type)
+val update : game -> (int * int) -> (int * int) -> move_result;;
