@@ -1,4 +1,5 @@
 (executable
- (name main)
- (modules main)
- (libraries libgame dream))
+ (name cli)
+ (modules cli)
+ (libraries libgame)
+)
