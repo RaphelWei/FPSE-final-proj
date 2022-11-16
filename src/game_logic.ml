@@ -7,6 +7,7 @@ type color =
   [@@deriving compare]
 ;;
 
+
 type rank = 
   | General        (* 帥/將 *)
   | Advisor        (* 仕/士 *)     
@@ -153,8 +154,11 @@ let move_pattern_valid_aux (subgrid : piece list list)=
         match List.rev t with 
         | [] -> (true, Some {id=Cannon;color})
         | h::t_ ->
-            if compare_color color h.color <> 0
+            if (compare_color (opponent_color color) h.color = 0
                 && List.count t_ ~f:(function | {id=Empty;color=N} -> false | _ -> true) = 1
+            ) || (
+              List.for_all t ~f:(function | {id=Empty;color=N} -> true | _ -> false)
+            )
             then (true, Some h)
             else (false, None)
         end
@@ -164,8 +168,11 @@ let move_pattern_valid_aux (subgrid : piece list list)=
             match List.rev t with 
             | [] -> (true, Some {id=Cannon;color})
             | [st]::t_ ->
-                if compare_color color st.color <> 0 
+                if (compare_color (opponent_color color) st.color = 0 
                     && List.count t_ ~f:(function | [{id=Empty;color=N}] -> false | _ -> true) = 1
+                ) || (
+                  List.for_all t ~f:(function | [{id=Empty;color=N}] -> true | _ -> false)
+                )
                 then (true, Some st)
                 else (false, None)
             | _ -> (false, None)
@@ -241,6 +248,7 @@ let move_valid board (i1,j1) (i2,j2) =
   in  
   let pattern_valid, pc = move_pattern_valid_aux subgrid in
   let valid = 
+    Bool.(<>) (i1=i2 && j1=j2) true && (* not moving is not allowed *)
     valid_pos (i1,j1) && 
     valid_pos (i2,j2) && 
     pattern_valid && 
@@ -263,4 +271,29 @@ let move board src dest =
     end
   | false, _ -> Error "Invalid move"
   | _ -> failwith "Impossible"
+;;
+
+let valid_move_list board (i,j) = 
+  let moves = 
+    match Utils.get_grid_idx board (i,j) with 
+    | Some {id=General;_}
+    | Some {id=Soldier;_} -> [(i-1,j);(i+1,j);(i,j-1);(i,j+1)]
+    | Some {id=Advisor;_} -> [(i-1,j-1);(i-1,j+1);(i+1,j-1);(i+1,j+1)]
+    | Some {id=Elephant;_} -> [(i-2,j-2);(i-2,j+2);(i+2,j-2);(i+2,j+2)]
+    | Some {id=Horse;_} -> [(i-1,j-2);(i-2,j-1);
+                            (i-1,j+2);(i-2,j+1);
+                            (i+1,j-2);(i+2,j-1);
+                            (i+1,j+2);(i+2,j+1)]
+    | Some {id=Chariot;_}
+    | Some {id=Cannon;_} -> 
+        let is = Utils.range 0 10 in 
+        let js = Utils.range 0 9 in 
+        List.map is ~f:(fun x -> (x,j)) @ List.map js ~f:(fun x -> (i,x))
+    | Some {id=Empty;_} -> []
+    | None -> failwith "valid_move_list: attempt to move a piece that's not in the board"
+  in 
+  moves 
+  |> List.filter ~f:valid_pos
+  |> List.filter ~f:(fun dest -> 
+                          let _,_, v = move_valid board (i,j) dest in v)
 ;;

@@ -12,4 +12,25 @@ type move_result =
 
 val init_game : unit -> game;;
 
+(* 
+  Give a game object, a source coordinate and destination coordinate
+  Return 
+    1. If the move is valid and the game has not ended, return Moved ( Ok (updated game) )
+    2. If the move is valid and black/red wins, return BlackWin(updated game) / RedWin(updated game)
+    3. If the move is invalid, return Moved (Error msg)
+ *)
 val update : game -> (int * int) -> (int * int) -> move_result;;
+
+
+(*
+  Given a game object, 
+  return a list 
+  [
+    (int * int) : source piece
+    (int * int) : destination piece
+    g : updated game
+  ]
+  of all possible games after taking a step
+ *)
+val valid_next_steps : game -> ((int * int) * (int * int) * game) list;;
+val valid_next_steps_aux : game -> (int * int) -> ((int * int) * (int * int ) * game) list;;
