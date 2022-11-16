@@ -78,15 +78,12 @@ let valid_next_steps_aux (g : game) (src : int * int) =
     )
 ;;
 
-let valid_next_steps g = 
-  if compare_color g.turn N = 0 
-  then []
-  else 
-    let movable = all_movable_pieces g in 
-    List.fold_left
-      movable
-      ~init:[]
-      ~f:(
-        fun acc src -> acc @ valid_next_steps_aux g src
-      )
+let valid_next_steps g =  
+  let movable = all_movable_pieces g in 
+  List.fold_left
+    movable
+    ~init:[]
+    ~f:(
+      fun acc src -> acc @ valid_next_steps_aux g src
+    )
 ;;

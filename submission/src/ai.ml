@@ -2,7 +2,10 @@ open Core;;
 open Game_logic;;
 (* open Game;; *)
 
-
+type agent = {
+  search_depth : int;
+  color : color
+}
 
 let piece_weight (p : piece) = 
   match p.id with 
@@ -45,7 +48,7 @@ let evaluate_board board =
             )
 ;;
 
-type minmax = 
+(* type minmax = 
   | Min 
   | Max
 ;;
@@ -58,35 +61,9 @@ let board_score (c : color) ((rval,bval) : int * int) =
   | Red -> rval - bval
   | Black -> bval - rval
   | N -> failwith "board_score : invalid color"
-;;
+;; *)
 
 
 
 
-let rec naive_min_max_aux (g : Game.game) (depth : int) (mm : minmax) turn =   
-  if depth = 0
-  then (None, evaluate_board g.board |> board_score g.turn)
-  else 
-    begin
-      let next_level = 
-        g 
-        |> Game.valid_next_steps
-        |> List.map ~f:(fun (src, dest ,g') -> (src, dest, naive_min_max_aux g' (depth-1) (switch_min_max mm) turn |> snd))
-      in 
-      let mm_func = mm |> function | Min -> List.min_elt | Max -> List.max_elt in 
-        mm_func
-          next_level
-          ~compare:(fun (_, _, score1) (_, _, score2) -> Int.compare score1 score2)
-        |> function 
-          | None -> (None, evaluate_board g.board |> board_score turn) 
-          | Some (src, dest, score) -> (Some( (src ,dest)), score)
-    end
-;;
-
-let naive_min_max (g : Game.game) (depth : int) = 
-  let (move, _) = naive_min_max_aux g depth Max g.turn in 
-  match move with
-  | None -> failwith "naive_min_max"
-  | Some (src, dest) -> (src, dest)
-;;
 

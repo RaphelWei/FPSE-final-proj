@@ -30,9 +30,7 @@ val update : game -> (int * int) -> (int * int) -> move_result;;
     (int * int) : destination piece
     g : updated game
   ]
-  of all possible games after taking a step.board
-  
-  if the game is in terminal state, then return an empty list
+  of all possible games after taking a step
  *)
 val valid_next_steps : game -> ((int * int) * (int * int) * game) list;;
 val valid_next_steps_aux : game -> (int * int) -> ((int * int) * (int * int ) * game) list;;
