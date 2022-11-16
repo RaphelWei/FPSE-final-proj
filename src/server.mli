@@ -1,5 +1,6 @@
 module G = Game
 
+
 type message_object = {message: string} [@@deriving yojson]
 
 type game_object = {game: G.game} [@@deriving yojson]
@@ -39,6 +40,18 @@ val game_load: string -> string
 val game_reset: string -> string
 
 val game_undo: string -> string
+
+val clients: unit -> (int, Dream.websocket) Hashtbl.t
+
+val sessions: unit -> (int, Dream.session) Hashtbl.t
+
+val games: unit -> (string, G.game) Hashtbl.t
+
+val game_id: unit -> int
+
+val session_id: unit -> string option
+
+
 
 
 
