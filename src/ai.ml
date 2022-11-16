@@ -61,34 +61,6 @@ let board_score (c : color) ((rval,bval) : int * int) =
   | Red -> rval - bval
   | Black -> bval - rval
   | N -> failwith "board_score : invalid color"
-
-
-let rec minimiax_aux root_color (g : Game.game) depth (mm : minmax) bound = 
-(* 
-  root_color <color> : the color of root player
-  g <game> : the current game state
-  depth <int> : the current depth of min-max tree
-  mm <minmax> : indicating current operation is min or max
-  bound <int> : if mm is min, then bound is a lower bound
-                if mm is max, then bound is a upper bound
-
-  Return : 
-    (int * int) * (int * int) option : move that reachs the min/max score
-    int : score
-
-  The root player always perform a "max" operation
- *)
-  if depth = 0
-  then
-    (None, (evaluate_board g.board) |> board_score root_color)
-  else
-    begin
-      Game.valid_next_steps g
-      |> List.filter ~f:(
-        fun 
-      )
-      
-    end
 ;;
 
 
