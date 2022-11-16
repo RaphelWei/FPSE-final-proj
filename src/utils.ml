@@ -51,3 +51,34 @@ let set_grid_idx (board : 'a list list) (i,j) elem =
   |> snd
   |> List.rev
 ;;
+
+let get_list_idx l idx = 
+  List.fold_until
+            l 
+            ~init:(0,None)
+            ~f:(
+              fun (i, _) item -> 
+                if i = idx
+                then Stop (i, Some item)
+                else Continue (i+1, None)
+            )
+            ~finish:Fn.id
+  |> snd
+;;
+
+let get_grid_idx board (i,j) = 
+  List.fold_until
+            board
+            ~init:(0,None)
+            ~f:(
+              fun (idx,_) row ->
+                if idx = i
+                then Stop (idx, get_list_idx row j)
+                else Continue (idx + 1, None)
+            )
+            ~finish:Fn.id
+  |> snd
+;;
+
+let range start _end = 
+  List.init (_end-start) ~f:(fun x->start + x)

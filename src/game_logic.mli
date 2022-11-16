@@ -32,13 +32,14 @@ val init_board : unit -> piece list list;;
     2. The original piece at the destination
  *)
 val move_pattern_valid_aux : piece list list -> (bool * piece option);;
-
 val move_range_valid_aux : piece list list -> (int * int) -> (int * int) -> bool;;
+
 
 (* return
     1. the src piece
     2. the destination piece
     3. whether the move is valid
+  Assuming the source coordinate is valid
    *)
 val move_valid : piece list list -> (int * int) -> (int * int) -> (piece * piece option * bool);;
 
@@ -48,3 +49,11 @@ val move_valid : piece list list -> (int * int) -> (int * int) -> (piece * piece
     if the movement is not valid, return Error "Invalid move"
  *)
 val move : piece list list -> (int * int) -> (int * int) -> (piece list list * piece * piece, string) result;;
+
+
+
+(*
+  Return a list of all valid destinations given a board and a source piece
+ *)
+val valid_move_list : piece list list -> (int * int) -> (int * int) list;;
+
