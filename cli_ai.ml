@@ -49,6 +49,7 @@ let build_board_str (g : game) =
 let parse string = Scanf.sscanf string "(%d,%d) (%d,%d)" (fun a b c d -> a,b,c,d )
 
 let () = 
+  let depth = 4 in 
   let g = ref (init_game ()) in 
   let endgame = ref false in 
   !g |> build_board_str |> print_string;
@@ -63,7 +64,8 @@ let () =
         let (i1,j1,i2,j2) = parse s in 
         (i1,j1), (i2,j2)
       else 
-        naive_min_max !g 2
+        (* naive_min_max !g 2 *)
+        min_max_alpha_beta !g depth
     in 
 
     match update !g (i1,j1) (i2,j2) with 
@@ -82,4 +84,3 @@ let () =
   done
 
 ;;
-

@@ -23,3 +23,5 @@ val evaluate_board : piece list list -> (int * int);;
 
 
 val naive_min_max : Game.game -> int -> (int * int) * (int * int);;
+
+val min_max_alpha_beta : Game.game -> int -> (int * int) * (int * int);;

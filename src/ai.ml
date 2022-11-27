@@ -1,6 +1,6 @@
 open Core;;
 open Game_logic;;
-(* open Game;; *)
+open Game;;
 
 
 
@@ -16,6 +16,9 @@ let piece_weight (p : piece) =
   | Empty -> 0
 ;;
 
+
+let minval = -10000001;;
+let maxval = 10000001;; 
 
 let evaluate_row (l : piece list) = 
 (* Return a pair (rvalue, bvalue) indicating the whole power of red and blue player *)
@@ -90,3 +93,55 @@ let naive_min_max (g : Game.game) (depth : int) =
   | Some (src, dest) -> (src, dest)
 ;;
 
+
+
+let fst_3_tuple x = match x with (a,_,_) -> a;;
+
+let rec min_max_alpha_beta_aux (g : Game.game) (depth : int) (mm : minmax) (alpha : int) (beta : int) (root_player : color) = 
+  if (compare_color g.turn N = 0) || (depth = 0)
+  then g.board |> evaluate_board |> board_score root_player, (-1,-1), (-1,-1)
+  else 
+    let children = Game.valid_next_steps g in 
+    match mm with 
+    | Min -> 
+      List.fold_until
+            children
+            ~init:(beta, (-1,-1), (-1,-1))
+            ~f:(
+              fun (bestbeta, bestsrc, bestdest) (src, dest, g') ->
+                let value = min_max_alpha_beta_aux g' (depth-1) Max alpha bestbeta root_player |> fst_3_tuple in 
+                if value <= alpha
+                then Stop (value, src, dest)
+                else 
+                  begin
+                    if value < bestbeta
+                    then Continue (value, src, dest)
+                    else Continue (bestbeta, bestsrc, bestdest)
+                  end 
+            )
+            ~finish:Fn.id
+    | Max ->
+      List.fold_until
+            children
+            ~init:(alpha, (-1,-1), (-1,-1))
+            ~f:(
+              fun (bestalpha, bestsrc, bestdest) (src, dest, g') ->
+                let value = min_max_alpha_beta_aux g' (depth-1) Min bestalpha beta root_player |> fst_3_tuple in 
+                if value > beta
+                then Stop (value, src, dest)
+                else 
+                  begin
+                    if value > bestalpha
+                    then Continue (value, src, dest)
+                    else Continue (bestalpha, bestsrc, bestdest)
+
+                  end
+            )
+            ~finish:Fn.id
+;;
+
+
+let min_max_alpha_beta g depth = 
+  match min_max_alpha_beta_aux g depth Max minval maxval g.turn with 
+  | (_, src, dest) -> src, dest
+;;
