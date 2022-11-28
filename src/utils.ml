@@ -1,11 +1,11 @@
 open Core;;
 
+(* get the subgrid board[imin:imax+1, jmin:jmax+1] between two positions (current and next)*)
 let get_subgrid (board : 'a list list) (i1,j1) (i2,j2) = 
   let imin = min i1 i2 in 
   let imax = max i1 i2 in 
   let jmin = min j1 j2 in 
   let jmax = max j1 j2 in 
-  (* get the subgrid board[imin:imax+1, jmin:jmax+1]*)
 
   List.fold_left 
         board
@@ -22,9 +22,8 @@ let get_subgrid (board : 'a list list) (i1,j1) (i2,j2) =
   |> List.rev
 ;;
 
-
-let set_list_idx l idx elem =   
 (* set the ij index of the list as the given element *)
+let set_list_idx l idx elem =   
   List.fold_left
           l
           ~init:(0,[])
@@ -38,6 +37,8 @@ let set_list_idx l idx elem =
   |> List.rev
 ;;
 
+(* returns a new grid with location (i, j) updated *)
+(* assumes i and j are valid indices *)
 let set_grid_idx (board : 'a list list) (i,j) elem = 
   List.fold_left
           board
@@ -52,6 +53,7 @@ let set_grid_idx (board : 'a list list) (i,j) elem =
   |> List.rev
 ;;
 
+(* retrieve an optioanl elem from list *)
 let get_list_idx l idx = 
   List.fold_until
             l 
@@ -66,6 +68,7 @@ let get_list_idx l idx =
   |> snd
 ;;
 
+(* retrieve an optioanl elem from broad *)
 let get_grid_idx board (i,j) = 
   List.fold_until
             board
