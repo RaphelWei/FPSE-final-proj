@@ -1,0 +1,4 @@
+(executable
+ (public_name Chess2)
+ (name main)
+ (libraries libgame))

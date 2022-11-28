@@ -3,3 +3,9 @@
  (modules cli)
  (libraries libgame)
 )
+
+(executable
+ (name cli_ai)
+ (modules cli_ai)
+ (libraries libgame)
+)

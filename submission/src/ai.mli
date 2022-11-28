@@ -1,6 +1,10 @@
 open Game_logic
 (* open Game *)
 
+type agent = {
+  search_depth : int;
+  color : color
+}
 
 
 val piece_weight : piece -> int;;
@@ -22,6 +26,3 @@ val evaluate_board : piece list list -> (int * int);;
 (* val generate_move : (piece list list) -> agent -> (int * int) -> (int * int);; *)
 
 
-val naive_min_max : Game.game -> int -> (int * int) * (int * int);;
-
-val min_max_alpha_beta : Game.game -> int -> (int * int) * (int * int);;
