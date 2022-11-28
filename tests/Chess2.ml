@@ -2,38 +2,45 @@ open OUnit2
 open Libgame
 
 (* Utils test *)
+let grid1 = [
+  [1;2;3;4;5;6;7;8];
+  [9;5;3;2;1;4;5;7];
+  [8;3;9;9;7;6;6;4]
+]
 let test_get_subgrid _ = 
-  assert_equal (Utils.get_subgrid 
-                [
-                  [1;2;3;4;5;6;7;8];
-                  [9;5;3;2;1;4;5;7];
-                  [8;3;9;9;7;6;6;4]
-                ]
-                (1,1)
-                (2,5))
+  assert_equal (Utils.get_subgrid grid1 (1,1)(2,5))
                 [
                   [5;3;2;1;4];
                   [3;9;9;7;6]
+                ];
+  assert_equal (Utils.get_subgrid grid1(0,0)(2,7)) grid1;
+  assert_equal (Utils.get_subgrid grid1 (2,7)(2,7)) [[4]];
+  assert_equal  (Utils.get_subgrid grid1 (2,5)(1,1))
+                [
+                  [5;3;2;1;4];
+                  [3;9;9;7;6]
+                ];
+  assert_equal  (Utils.get_subgrid grid1 (1,7)(1,1))
+                [
+                  [5;3;2;1;4;5;7]
                 ]
-                
 ;;
 
-let test_set_grid_idx _ = 
-  let grid = [
+let grid2 = [
       [1;2;3;4;5;6;7];
       [7;6;5;4;3;2;1];
       [2;2;3;3;4;4;5]
     ]
-  in 
+let test_set_grid_idx _ = 
   assert_equal 
-    (Utils.set_grid_idx grid (0,0) 1)
+    (Utils.set_grid_idx grid2 (0,0) 1)
     [
       [1;2;3;4;5;6;7];
       [7;6;5;4;3;2;1];
       [2;2;3;3;4;4;5]
     ];
   assert_equal 
-    (Utils.set_grid_idx grid (2,4) 1)
+    (Utils.set_grid_idx grid2 (2,4) 1)
     [
       [1;2;3;4;5;6;7];
       [7;6;5;4;3;2;1];
@@ -60,14 +67,21 @@ let test_get_grid_idx _ =
   assert_equal (Utils.get_grid_idx board (1,7)) (None);
 ;;
 
+
+
+
+
 (* Game logic test *)
 let test_move_pattern_valid_aux _ = 
   
   (* Chariot *)
   assert_equal Game_logic.(move_pattern_valid_aux [[{id=Chariot; color=Red}]]) (true, Some {id=Chariot; color=Red});
-  assert_equal Game_logic.(move_pattern_valid_aux [[{id=Chariot; color=Red}; {id=Empty;color=N};{id=Empty;color=N};{id=Empty;color=N};{id=Soldier;color=Black}]]) (true, Some {id=Soldier;color=Black});
-  assert_equal Game_logic.(move_pattern_valid_aux [[{id=Chariot; color=Red}; {id=Empty;color=N};{id=Empty;color=N};{id=Empty;color=N};{id=Soldier;color=Red}]]) (false, None);
-  assert_equal Game_logic.(move_pattern_valid_aux [[{id=Chariot; color=Red}; {id=Empty;color=N};{id=Empty;color=N};{id=Soldier;color=Red};{id=Soldier;color=Red}]]) (false, None);
+  assert_equal Game_logic.(move_pattern_valid_aux [[{id=Chariot; color=Red}; {id=Empty;color=N};{id=Empty;color=N};{id=Empty;color=N};{id=Soldier;color=Black}]]) 
+              (true, Some {id=Soldier;color=Black});
+  assert_equal Game_logic.(move_pattern_valid_aux [[{id=Chariot; color=Red}; {id=Empty;color=N};{id=Empty;color=N};{id=Empty;color=N};{id=Soldier;color=Red}]]) 
+              (false, None);
+  assert_equal Game_logic.(move_pattern_valid_aux [[{id=Chariot; color=Red}; {id=Empty;color=N};{id=Empty;color=N};{id=Soldier;color=Red};{id=Soldier;color=Red}]]) 
+              (false, None);
 
   assert_equal Game_logic.(move_pattern_valid_aux [ [{id=Chariot; color=Red}]; 
                                               [{id=Empty;color=N}];
