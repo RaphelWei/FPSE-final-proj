@@ -2,7 +2,7 @@ open Core;;
 open Game_logic;;
 
 type game = {
-  board : Game_logic.piece list list;
+  board : Game_logic.boardt;
   turn : Game_logic.color
 };;
 

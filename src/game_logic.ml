@@ -24,6 +24,8 @@ type piece = {
   color : color;
 };;
 
+type boardt = piece list list;;
+
 let get_piece_str p = 
   match p with 
   | {id=General; color=Red} -> "帥"
@@ -81,7 +83,7 @@ let init_board () =
 ;;
 
 
-let move_pattern_valid_aux (subgrid : piece list list)= 
+let move_pattern_valid_aux (subgrid : boardt)= 
     (* 
         Validate the pattern of stone movement, and do not take care of the absolute movement
         Assume the subgrid is well-shaped ( a rectangle )
@@ -182,7 +184,7 @@ let move_pattern_valid_aux (subgrid : piece list list)=
 ;;
 
 
-let move_range_valid_aux subgrid (i1,j1) (i2,j2) = 
+let move_range_valid_aux (subgrid : boardt) (i1,j1) (i2,j2) = 
   match subgrid with 
 
   (* Elephant cannot pass the river *)
@@ -240,7 +242,7 @@ let valid_pos (i,j) =
 ;;
 
 
-let move_valid board (i1,j1) (i2,j2) =
+let move_valid (board : boardt) (i1,j1) (i2,j2) =
   let subgrid = 
     Utils.get_subgrid board (i1,j1) (i2,j2)
     |> (fun x -> if i1 <= i2 then x else List.rev x)
