@@ -212,6 +212,19 @@ let test_valid_next_steps_aux _ =
   assert_equal (Game.valid_next_steps_aux g (9,2) |> List.length) 2;
 ;;
 
+
+(* AI tests *)
+
+let test_min_max_alpha_beta_aux _ = 
+  let g = Game.init_game() in 
+  let fst3 = function (a,_,_) -> a in 
+  let thd3 = function (_,_,a) -> a in
+  let open Ai in 
+  assert_equal ((Ai.min_max_alpha_beta_aux g 4 Min minval maxval g.turn |> fst3) <= (Ai.min_max_alpha_beta_aux g 4 Max minval maxval g.turn |> fst3)) true;
+  let src, dest = Ai.naive_min_max g 2 in 
+  assert_equal (Game_logic.move_valid (g.board) src dest |> thd3) true;
+;;
+
 let utils_tests = 
   "utils tests" >: test_list
   [
@@ -230,6 +243,13 @@ let game_logic_tests =
     "valid_next_steps_aux" >:: test_valid_next_steps_aux
   ]
 
-let series = "">::: [game_logic_tests; utils_tests]
+let ai_tests = 
+  "ai tests" >: test_list
+  [
+    "min_max_alpha_beta_aux" >:: test_min_max_alpha_beta_aux
+  ]
+
+
+let series = "">::: [game_logic_tests; utils_tests; ai_tests]
 
 let () = run_test_tt_main series

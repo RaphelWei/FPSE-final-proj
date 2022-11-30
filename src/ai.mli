@@ -2,6 +2,13 @@ open Game_logic
 (* open Game *)
 
 
+val minval : int;;
+val maxval : int;;
+
+type minmax = 
+  | Min 
+  | Max
+;;
 
 val piece_weight : piece -> int;;
 
@@ -23,5 +30,7 @@ val evaluate_board : piece list list -> (int * int);;
 
 
 val naive_min_max : Game.game -> int -> (int * int) * (int * int);;
+
+val min_max_alpha_beta_aux : Game.game -> int -> minmax -> int -> int -> color -> (int * (int * int) * (int * int));;
 
 val min_max_alpha_beta : Game.game -> int -> (int * int) * (int * int);;
