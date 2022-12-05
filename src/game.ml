@@ -4,7 +4,7 @@ open Game_logic;;
 type game = {
   board : Game_logic.boardt;
   turn : Game_logic.color
-};;
+} [@@deriving yojson];;
 
 type move_result = 
   | Moved of (game, string) result

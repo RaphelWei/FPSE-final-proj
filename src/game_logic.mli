@@ -2,7 +2,7 @@ type color =
   | Red
   | Black 
   | N
-  [@@deriving compare]
+  [@@deriving compare, yojson]
 ;;
 
 type rank = 
@@ -14,15 +14,16 @@ type rank =
   | Cannon         (* 炮/砲 *)
   | Soldier        (* 兵/卒 *)
   | Empty
+  [@@deriving yojson]
 ;;
 
 type piece = {
   id : rank;
   color : color;
-};;
+} [@@deriving yojson];;
 
 
-type boardt = piece list list;;
+type boardt = piece list list [@@deriving yojson];;
 
 val get_piece_str : piece -> string;;
 
