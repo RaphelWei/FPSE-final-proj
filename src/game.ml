@@ -28,11 +28,17 @@ let update (g:game) src dest =
 
   | {board=_; turn=Black}, Ok (_, {id=_; color=Red}, _) -> Moved (Error "You can only move your pieces")
   | {board=_; turn=Black}, Ok(b, _, {id=General;color=Red}) -> BlackWin ({board=b;turn=N})
-  | {board=_; turn=Black}, Ok (b, _, _) -> Moved (Ok {board=b; turn=Red})
+  | {board=_; turn=Black}, Ok (b, _, _) ->
+    if (Game_logic.stalemate b Red) then BlackWin ({board=b;turn=N})
+    else if (Game_logic.checkmate b Red) then BlackWin ({board=b;turn=N})
+    else Moved (Ok {board=b; turn=Red})
 
   | {board=_; turn=Red}, Ok (_, {id=_; color=Black}, _) -> Moved (Error "You can only move your pieces")
   | {board=_; turn=Red}, Ok(b, _, {id=General;color=Black}) -> RedWin ({board=b;turn=N})
-  | {board=_; turn=Red}, Ok (b, _, _) -> Moved (Ok {board=b; turn=Black})
+  | {board=_; turn=Red}, Ok (b, _, _) -> 
+    if (Game_logic.stalemate b Black) then  RedWin ({board=b;turn=N})
+    else if (Game_logic.checkmate b Black) then RedWin ({board=b;turn=N})
+    else Moved (Ok {board=b; turn=Black})
 ;;
 
 

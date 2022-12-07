@@ -1,4 +1,6 @@
 open Core;;
+open Utils;;
+open Option;;
 
 type color =  
   | Red
@@ -297,3 +299,84 @@ let valid_move_list board (i,j) =
   |> List.filter ~f:(fun dest -> 
                           let _,_, v = move_valid board (i,j) dest in v)
 ;;
+
+
+let stalemate board color = 
+  (* color of current player*)
+  let pieces = 
+    Utils.get_pieces board color
+    |> List.map ~f:(fun (i,j) -> (i,j, Utils.get_grid_idx board (i,j)))
+    |> List.filter ~f:(fun (_,_,x) -> match x with | Some _ -> true | _ -> false)
+    |> List.map ~f:(fun (i,j,x) -> (i,j, Option.value_exn x))
+  in 
+  let moves = 
+    List.map pieces ~f:(fun (i,j,_) -> (i,j, valid_move_list board (i,j)))
+    |> List.filter ~f:(fun (_,_,x) -> List.length x > 0)
+  in 
+  List.length moves = 0
+
+let undercheck board color = 
+  (* get pieces of the current player on board and their indices*)
+  let pieces = 
+    Utils.get_pieces board color
+    |> List.map ~f:(fun (i,j) -> (i,j, Utils.get_grid_idx board (i,j)))
+    |> List.filter ~f:(fun (_,_,x) -> match x with | Some _ -> true | _ -> false)
+    |> List.map ~f:(fun (i,j,x) -> (i,j, Option.value_exn x))
+  in 
+  (* find all valid moves of pieces above *)
+  let moves = 
+    List.map pieces ~f:(fun (i,j,_) -> (i,j, valid_move_list board (i,j)))
+    |> List.filter ~f:(fun (_,_,x) -> List.length x > 0)
+  in 
+  (* get destination of the moves *)
+  let moves' = 
+    List.map moves ~f:(fun (i,j,dests) -> 
+        List.map dests ~f:(fun dest -> 
+            let _,_,v = move_valid board (i,j) dest in 
+            if v then Some dest else None))
+    |> List.concat
+    |> List.filter ~f:(fun x -> match x with | Some _ -> true | _ -> false)
+    |> List.map ~f:Option.value_exn
+  in 
+  (* get position of opposite general *)
+  let general = 
+    Utils.get_pieces board (Utils.opposite_color color)
+    |> List.filter ~f:(fun (i,j) -> 
+        match Utils.get_grid_idx board (i,j) with 
+        | Some {id=General;_} -> true
+        | _ -> false)
+    |> List.hd_exn
+  in 
+  (* check if position of the general is in the valid destination of the current pieces *)
+  List.mem moves' general ~equal:(fun (i, j) (i', j') -> i = i' && j = j')
+
+
+
+let checkmate board color = 
+  (* if the opposite player is undercheck *)
+  if undercheck board color then
+    (* get position of opposite general *)
+    let general = 
+      Utils.get_pieces board (Utils.opposite_color color)
+      |> List.filter ~f:(fun (i,j) -> 
+          match Utils.get_grid_idx board (i,j) with 
+          | Some {id=General;_} -> true
+          | _ -> false)
+      |> List.hd_exn
+    in
+    (* get valid moves of the general *)
+    let general_moves = valid_move_list board general in
+
+    let general_moves' = 
+      List.filter general_moves ~f:(fun dest -> 
+          let _,_,v = move_valid board general dest in v)
+    in
+    let general_moves'' = 
+      List.filter general_moves' ~f:(fun dest -> 
+          (* check if any possible move get the opposite general out of check state *)
+          match move board general dest with 
+          | Error _ -> false
+          | Ok(board',_,_) -> not (undercheck board' color))
+    in
+    List.length general_moves'' = 0
+  else false

@@ -85,3 +85,34 @@ let get_grid_idx board (i,j) =
 
 let range start _end = 
   List.init (_end-start) ~f:(fun x->start + x)
+
+
+(* returns a list of all pieces on the board of the given color*)
+let get_pieces board color = 
+  List.fold_left
+          board
+          ~init:[]
+          ~f:(
+            fun acc row -> 
+              List.fold_left
+                      row
+                      ~init:acc
+                      ~f:(
+                        fun acc item -> 
+                          match item with 
+                          | Some (c,_) when c = color -> item :: acc
+                          | _ -> acc
+                      )
+          )
+  |> List.rev
+;;
+
+
+
+let opposite_color color = 
+  match color with 
+  | Red -> Black
+  | Black -> Red
+;;
+
+(* returns a list of all possible moves for a given piece *)
