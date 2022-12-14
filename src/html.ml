@@ -88,8 +88,13 @@ let build_html_from_board (board : Game_logic.boardt) =
         };
 
         socket.onmessage = function (msg) {
-            var board_div = document.getElementById('board_div');
-            board_div.innerHTML = msg.data;
+            console.log(msg.data);
+            if(msg.data.length <= 100){
+                alert(msg.data);
+            }else{
+                var board_div = document.getElementById('board_div');
+                board_div.innerHTML = msg.data;
+            }
         };
     </script>
     <div class=\"container\">
