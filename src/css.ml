@@ -151,546 +151,557 @@ body {
     user-select: none;
 }
 
+.chess_n {
+    box-sizing: border-box;
+    width: 50px;
+    height: 50px;
+    user-select: none;
+}
+
 .red {
     color: #f00;
 }
 
-#pos-101 {
+.black {
+    color: #00f;
+}
+
+#pos-10_1 {
     position: absolute;
     left: -25px;
     top: 515px
 }
 
-#pos-102 {
+#pos-10_2 {
     position: absolute;
     left: 35px;
     top: 515px
 }
 
-#pos-103 {
+#pos-10_3 {
     position: absolute;
     left: 95px;
     top: 515px
 }
 
-#pos-104 {
+#pos-10_4 {
     position: absolute;
     left: 155px;
     top: 515px
 }
 
-#pos-105 {
+#pos-10_5 {
     position: absolute;
     left: 215px;
     top: 515px
 }
 
-#pos-106 {
+#pos-10_6 {
     position: absolute;
     left: 275px;
     top: 515px
 }
 
-#pos-107 {
+#pos-10_7 {
     position: absolute;
     left: 335px;
     top: 515px
 }
 
-#pos-108 {
+#pos-10_8 {
     position: absolute;
     left: 395px;
     top: 515px
 }
 
-#pos-109 {
+#pos-10_9 {
     position: absolute;
     left: 455px;
     top: 515px
 }
 
-#pos-91 {
+#pos-9_1 {
     position: absolute;
     left: -25px;
     top: 455px
 }
 
-#pos-92 {
+#pos-9_2 {
     position: absolute;
     left: 35px;
     top: 455px
 }
 
-#pos-93 {
+#pos-9_3 {
     position: absolute;
     left: 95px;
     top: 455px
 }
 
-#pos-94 {
+#pos-9_4 {
     position: absolute;
     left: 155px;
     top: 455px
 }
 
-#pos-95 {
+#pos-9_5 {
     position: absolute;
     left: 215px;
     top: 455px
 }
 
-#pos-96 {
+#pos-9_6 {
     position: absolute;
     left: 275px;
     top: 455px
 }
 
-#pos-97 {
+#pos-9_7 {
     position: absolute;
     left: 335px;
     top: 455px
 }
 
-#pos-98 {
+#pos-9_8 {
     position: absolute;
     left: 395px;
     top: 455px
 }
 
-#pos-99 {
+#pos-9_9 {
     position: absolute;
     left: 455px;
     top: 455px
 }
 
 
-#pos-81 {
+#pos-8_1 {
     position: absolute;
     left: -25px;
     top: 395px
 }
 
-#pos-82 {
+#pos-8_2 {
     position: absolute;
     left: 35px;
     top: 395px
 }
 
-#pos-83 {
+#pos-8_3 {
     position: absolute;
     left: 95px;
     top: 395px
 }
 
-#pos-84 {
+#pos-8_4 {
     position: absolute;
     left: 155px;
     top: 395px
 }
 
-#pos-85 {
+#pos-8_5 {
     position: absolute;
     left: 215px;
     top: 395px
 }
 
-#pos-86 {
+#pos-8_6 {
     position: absolute;
     left: 275px;
     top: 395px
 }
 
-#pos-87 {
+#pos-8_7 {
     position: absolute;
     left: 335px;
     top: 395px
 }
 
-#pos-88 {
+#pos-8_8 {
     position: absolute;
     left: 395px;
     top: 395px
 }
 
-#pos-89 {
+#pos-8_9 {
     position: absolute;
     left: 455px;
     top: 395px
 }
 
-#pos-71 {
+#pos-7_1 {
     position: absolute;
     left: -25px;
     top: 335px
 }
 
-#pos-72 {
+#pos-7_2 {
     position: absolute;
     left: 35px;
     top: 335px
 }
 
-#pos-73 {
+#pos-7_3 {
     position: absolute;
     left: 95px;
     top: 335px
 }
 
-#pos-74 {
+#pos-7_4 {
     position: absolute;
     left: 155px;
     top: 335px
 }
 
-#pos-75 {
+#pos-7_5 {
     position: absolute;
     left: 215px;
     top: 335px
 }
 
-#pos-76 {
+#pos-7_6 {
     position: absolute;
     left: 275px;
     top: 335px
 }
 
-#pos-77 {
+#pos-7_7 {
     position: absolute;
     left: 335px;
     top: 335px
 }
 
-#pos-78 {
+#pos-7_8 {
     position: absolute;
     left: 395px;
     top: 335px
 }
 
-#pos-79 {
+#pos-7_9 {
     position: absolute;
     left: 455px;
     top: 335px
 }
 
-#pos-61 {
+#pos-6_1 {
     position: absolute;
     left: -25px;
     top: 275px
 }
 
-#pos-62 {
+#pos-6_2 {
     position: absolute;
     left: 35px;
     top: 275px
 }
 
-#pos-63 {
+#pos-6_3 {
     position: absolute;
     left: 95px;
     top: 275px
 }
 
-#pos-64 {
+#pos-6_4 {
     position: absolute;
     left: 155px;
     top: 275px
 }
 
-#pos-65 {
+#pos-6_5 {
     position: absolute;
     left: 215px;
     top: 275px
 }
 
-#pos-66 {
+#pos-6_6 {
     position: absolute;
     left: 275px;
     top: 275px
 }
 
-#pos-67 {
+#pos-6_7 {
     position: absolute;
     left: 335px;
     top: 275px
 }
 
-#pos-68 {
+#pos-6_8 {
     position: absolute;
     left: 395px;
     top: 275px
 }
 
-#pos-69 {
+#pos-6_9 {
     position: absolute;
     left: 455px;
     top: 275px
 }
 
-#pos-51 {
+#pos-5_1 {
     position: absolute;
     left: -25px;
     top: 215px
 }
 
-#pos-52 {
+#pos-5_2 {
     position: absolute;
     left: 35px;
     top: 215px
 }
 
-#pos-53 {
+#pos-5_3 {
     position: absolute;
     left: 95px;
     top: 215px
 }
 
-#pos-54 {
+#pos-5_4 {
     position: absolute;
     left: 155px;
     top: 215px
 }
 
-#pos-55 {
+#pos-5_5 {
     position: absolute;
     left: 215px;
     top: 215px
 }
 
-#pos-56 {
+#pos-5_6 {
     position: absolute;
     left: 275px;
     top: 215px
 }
 
-#pos-57 {
+#pos-5_7 {
     position: absolute;
     left: 335px;
     top: 215px
 }
 
-#pos-58 {
+#pos-5_8 {
     position: absolute;
     left: 395px;
     top: 215px
 }
 
-#pos-59 {
+#pos-5_9 {
     position: absolute;
     left: 455px;
     top: 215px
 }
 
-#pos-41 {
+#pos-4_1 {
     position: absolute;
     left: -25px;
     top: 155px
 }
 
-#pos-42 {
+#pos-4_2 {
     position: absolute;
     left: 35px;
     top: 155px
 }
 
-#pos-43 {
+#pos-4_3 {
     position: absolute;
     left: 95px;
     top: 155px
 }
 
-#pos-44 {
+#pos-4_4 {
     position: absolute;
     left: 155px;
     top: 155px
 }
 
-#pos-45 {
+#pos-4_5 {
     position: absolute;
     left: 215px;
     top: 155px
 }
 
-#pos-46 {
+#pos-4_6 {
     position: absolute;
     left: 275px;
     top: 155px
 }
 
-#pos-47 {
+#pos-4_7 {
     position: absolute;
     left: 335px;
     top: 155px
 }
 
-#pos-48 {
+#pos-4_8 {
     position: absolute;
     left: 395px;
     top: 155px
 }
 
-#pos-49 {
+#pos-4_9 {
     position: absolute;
     left: 455px;
     top: 155px
 }
 
-#pos-31 {
+#pos-3_1 {
     position: absolute;
     left: -25px;
     top: 95px
 }
 
-#pos-32 {
+#pos-3_2 {
     position: absolute;
     left: 35px;
     top: 95px
 }
 
-#pos-33 {
+#pos-3_3 {
     position: absolute;
     left: 95px;
     top: 95px
 }
 
-#pos-34 {
+#pos-3_4 {
     position: absolute;
     left: 155px;
     top: 95px
 }
 
-#pos-35 {
+#pos-3_5 {
     position: absolute;
     left: 215px;
     top: 95px
 }
 
-#pos-36 {
+#pos-3_6 {
     position: absolute;
     left: 275px;
     top: 95px
 }
 
-#pos-37 {
+#pos-3_7 {
     position: absolute;
     left: 335px;
     top: 95px
 }
 
-#pos-38 {
+#pos-3_8 {
     position: absolute;
     left: 395px;
     top: 95px
 }
 
-#pos-39 {
+#pos-3_9 {
     position: absolute;
     left: 455px;
     top: 95px
 }
 
-#pos-21 {
+#pos-2_1 {
     position: absolute;
     left: -25px;
     top: 35px
 }
 
-#pos-22 {
+#pos-2_2 {
     position: absolute;
     left: 35px;
     top: 35px
 }
 
-#pos-23 {
+#pos-2_3 {
     position: absolute;
     left: 95px;
     top: 35px
 }
 
-#pos-24 {
+#pos-2_4 {
     position: absolute;
     left: 155px;
     top: 35px
 }
 
-#pos-25 {
+#pos-2_5 {
     position: absolute;
     left: 215px;
     top: 35px
 }
 
-#pos-26 {
+#pos-2_6 {
     position: absolute;
     left: 275px;
     top: 35px
 }
 
-#pos-27 {
+#pos-2_7 {
     position: absolute;
     left: 335px;
     top: 35px
 }
 
-#pos-28 {
+#pos-2_8 {
     position: absolute;
     left: 395px;
     top: 35px
 }
 
-#pos-99 {
+#pos-2_9 {
     position: absolute;
     left: 455px;
     top: 35px
 }
 
-#pos-11 {
+#pos-1_1 {
     position: absolute;
     left: -25px;
     top: -25px
 }
 
-#pos-12 {
+#pos-1_2 {
     position: absolute;
     left: 35px;
     top: -25px
 }
 
-#pos-13 {
+#pos-1_3 {
     position: absolute;
     left: 95px;
     top: -25px
 }
 
-#pos-14 {
+#pos-1_4 {
     position: absolute;
     left: 155px;
     top: -25px
 }
 
-#pos-15 {
+#pos-1_5 {
     position: absolute;
     left: 215px;
     top: -25px
 }
 
-#pos-16 {
+#pos-1_6 {
     position: absolute;
     left: 275px;
     top: -25px
 }
 
-#pos-17 {
+#pos-1_7 {
     position: absolute;
     left: 335px;
     top: -25px
 }
 
-#pos-18 {
+#pos-1_8 {
     position: absolute;
     left: 395px;
     top: -25px
 }
 
-#pos-19 {
+#pos-1_9 {
     position: absolute;
     left: 455px;
     top: -25px

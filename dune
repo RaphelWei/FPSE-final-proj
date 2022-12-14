@@ -9,3 +9,17 @@
  (modules cli_ai)
  (libraries libgame)
 )
+
+(executable
+ (name server)
+ (modules server)
+ (libraries libgame dream)
+ (preprocess (pps lwt_ppx))
+)
+
+(executable
+ (name web_ai)
+ (modules web_ai)
+ (libraries libgame dream)
+ (preprocess (pps lwt_ppx))
+)

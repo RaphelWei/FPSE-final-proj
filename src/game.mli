@@ -1,5 +1,5 @@
 type game = {
-  board : Game_logic.piece list list;
+  board : Game_logic.boardt;
   turn : Game_logic.color (* turn=N only when the game has ended *)
 } [@@deriving yojson];;
 

@@ -1,6 +1,6 @@
 (library
  (name libgame)
- (modules utils game_logic game ai mmeg)
+ (modules utils game_logic game ai mmeg html css)
  (libraries core)
  (preprocess (pps bisect_ppx ppx_compare ppx_deriving_yojson))
 )

@@ -1,6 +1,7 @@
 open Core;;
 open Game_logic;;
 
+[@@@coverage off]
 type game = {
   board : Game_logic.boardt;
   turn : Game_logic.color
@@ -11,6 +12,7 @@ type move_result =
   | BlackWin of game
   | RedWin of game
 ;;
+[@@@coverage on]
 
 let init_game () = 
   {
@@ -24,7 +26,7 @@ let update (g:game) src dest =
   let open Game_logic in 
   match g, Game_logic.move g.board src dest with 
   | _, Error s -> Moved (Error s)
-  | {board=_; turn=N}, _ -> failwith "Impossible"
+  | {board=_; turn=N}, _ -> failwith "Impossible" [@coverage off]
 
   | {board=_; turn=Black}, Ok (_, {id=_; color=Red}, _) -> Moved (Error "You can only move your pieces")
   | {board=_; turn=Black}, Ok(b, _, {id=General;color=Red}) -> BlackWin ({board=b;turn=N})
@@ -74,7 +76,7 @@ let valid_next_steps_aux (g : game) (src : int * int) =
         | Moved (Ok g')
         | RedWin g' 
         | BlackWin g' -> (src, dest, g') :: acc
-        | _ -> failwith "valid_next_steps_aux"
+        | _ -> failwith "valid_next_steps_aux" [@coverage off]
     )
 ;;
 

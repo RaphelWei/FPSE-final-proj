@@ -1,33 +1,44 @@
 open Core;;
 
+[@@@coverage off]
 type color =  
   | Red
   | Black 
   | N 
   [@@deriving compare, yojson]
 ;;
+[@@@coverage on]
 
 
+
+
+[@@@coverage off]
 type rank = 
-  | General        (* 帥/將 *)
-  | Advisor        (* 仕/士 *)     
-  | Elephant       (* 相/象 *)
-  | Horse          (* 傌/馬 *)
-  | Chariot        (* 俥/車 *)
-  | Cannon         (* 炮/砲 *)
-  | Soldier        (* 兵/卒 *)
-  | Empty
+
+  | General        (* 帥/將 *) 
+  | Advisor        (* 仕/士 *)   
+  | Elephant       (* 相/象 *) 
+  | Horse          (* 傌/馬 *) 
+  | Chariot        (* 俥/車 *) 
+  | Cannon         (* 炮/砲 *) 
+  | Soldier        (* 兵/卒 *) 
+  | Empty 
   [@@deriving yojson]
 ;;
+ [@@@coverage on]
 
+[@@@coverage off]
 type piece = {
   id : rank;
   color : color;
-} [@@deriving yojson];;
+} [@@deriving yojson][@@coverage off];;
 
 type boardt = piece list list [@@deriving yojson];;
+[@@@coverage on]
 
+[@@@coverage off]
 let get_piece_str p = 
+  
   match p with 
   | {id=General; color=Red} -> "帥"
   | {id=General; color=Black} -> "將"
@@ -53,6 +64,8 @@ let get_piece_str p =
   | {id=Empty; color=N} -> " + "
   | _ -> failwith "possible"
 ;;
+[@@@coverage on]
+
 
 let opponent_color = function Red -> Black | Black -> Red | N -> failwith "Impossible"
 
@@ -259,7 +272,7 @@ let move_valid (board : boardt) (i1,j1) (i2,j2) =
   in 
   match subgrid with 
   | (h::_)::_ -> (h, pc, valid)
-  | _ -> failwith "impossible"
+  | _ -> failwith "impossible" [@coverage off]
 ;;
 
 let move board src dest = 
@@ -273,7 +286,7 @@ let move board src dest =
       Ok (b', pc_src, pc)
     end
   | false, _ -> Error "Invalid move"
-  | _ -> failwith "Impossible"
+  | _ -> failwith "Impossible" [@coverage off]
 ;;
 
 let valid_move_list board (i,j) = 
