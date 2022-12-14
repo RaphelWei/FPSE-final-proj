@@ -39,12 +39,33 @@ let handle_client socket =
         loop () *)
         match update_game (!game) msg with 
         | Game.(Moved (Ok g')) -> 
-          game := g';
+          (* game := g';
           let new_board_msg = Html.build_board_html_from_board g'.board in 
-          let%lwt () = Dream.send socket new_board_msg in 
-          loop ()
+          let%lwt () = Dream.send socket new_board_msg in  *)
+          let (i1,j1), (i2,j2) = Libgame.Ai.min_max_alpha_beta g' 4 in 
+          begin 
+            match Game.update g' (i1,j1) (i2,j2) with  
+            | Moved (Ok g'') -> 
+              game := g'';
+              let new_board_msg = Html.build_board_html_from_board g''.board in 
+              let%lwt () = Dream.send socket new_board_msg in 
+              loop()
+            | Game.(BlackWin g'') -> 
+              let new_board_msg = Html.build_board_html_from_board g''.board in 
+              let%lwt () = Dream.send socket new_board_msg in 
+              let%lwt () = Dream.send socket "Black win" in 
+              loop()
+            | Game.(RedWin g'') -> 
+              let new_board_msg = Html.build_board_html_from_board g''.board in 
+              let%lwt () = Dream.send socket new_board_msg in 
+              let%lwt () = Dream.send socket "Red win" in 
+              loop()
+            | _ -> failwith ""
+          end
+          (* loop () *)
         | Game.(Moved (Error error)) ->
           let%lwt () = Dream.send socket error in 
+
           loop ()
         | Game.(BlackWin g') -> 
           let new_board_msg = Html.build_board_html_from_board g'.board in 
