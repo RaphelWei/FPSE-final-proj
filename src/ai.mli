@@ -13,8 +13,6 @@ type minmax =
 val piece_weight : piece -> int;;
 
 
-
-
 (*
   Given a board, evaluate the weight sum of red pieces and black pieces
  *)

@@ -118,6 +118,9 @@ let test_move_pattern_valid_aux _ =
   assert_equal Game_logic.(move_pattern_valid_aux [ [{id=Horse;color=Red}; {id=Empty;color=N}; {id=Empty;color=N}]; 
                                               [{id=Soldier;color=Red}; {id=Soldier;color=Red};{id=Empty;color=N}]; 
                                               [{id=Empty;color=N}; {id=Horse;color=Black};{id=Empty;color=N}]]) (false, None);
+                                
+  assert_equal Game_logic.(move_pattern_valid_aux [ [{id=Horse;color=Red}; {id=Empty;color=N}; {id=Empty;color=N}]; 
+                                              [{id=Soldier;color=Red}; {id=Soldier;color=Red};{id=Empty;color=N}]]) (true, Some{id=Empty; color=N});
 
   (* Xiang fei tian *)
   assert_equal Game_logic.(move_pattern_valid_aux [ [{id=Elephant;color=Red}; {id=Empty;color=N}; {id=Empty;color=N}];

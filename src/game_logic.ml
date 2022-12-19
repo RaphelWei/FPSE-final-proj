@@ -134,6 +134,10 @@ let move_pattern_valid_aux (subgrid : boardt)=
     | [ [{id=Horse; color};       _];
         [{id=Empty; color=N};     _];
         [_;                     st]]
+
+    | [ [{id=Horse; color};       {id=Empty; color=N}; _];
+        [_;     _; st]]
+
         
     
     (* Xiang fei tian *)
@@ -232,7 +236,7 @@ let move_range_valid_aux (subgrid : boardt) (i1,j1) (i2,j2) =
       end 
 
   | ({id=Soldier; color=Black}::_)::_ ->
-    if i1 >= 4 
+    if i1 >= 5 
     then 
       begin
         if i2 <= i1 && j2 = j1 then true else false

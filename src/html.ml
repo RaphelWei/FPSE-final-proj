@@ -2,6 +2,44 @@ open Core;;
 
 
 
+let build_index_page () = 
+    "
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <style>
+    .container { 
+    height: 400px;
+    position: relative;
+    border: 3px solid green; 
+    }
+
+    .center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    }
+    </style>
+    </head>
+    <body>
+
+    <h2>Chinese Chess Game</h2>
+
+    <div class=\"container\">
+    <div class=\"center\">
+        <button style=\"height: 80px; width: 200px;\" onclick=\"window.location.href='pvp';\"> Play against a player </button> <br>
+        <p></p>
+        <button style=\"height: 80px; width: 200px;\" onclick=\"window.location.href='pve';\"> Play against AI </button>
+    </div>
+    </div>
+
+    </body>
+    </html>
+    "
+;;
 
 let build_chess_html_from_piece i j piece = 
   (*
@@ -20,7 +58,6 @@ let build_chess_html_from_piece i j piece =
     Printf.sprintf "<div class=\"chess_n\" id=\"pos-%d_%d\" onclick=\"piece_clicked(%d,%d)\">%s</div>\n" i j i j "" 
   else 
     Printf.sprintf "<div class=\"chess %s\" id=\"pos-%d_%d\" onclick=\"piece_clicked(%d,%d)\">%s</div>\n" color i j i j str 
-
 
 
 let build_row_html_from_row l i = 
@@ -49,7 +86,7 @@ let build_board_html_from_board (board : Game_logic.boardt) =
   |> fst |> fun x -> x ^ "</div>"
 
 
-let build_html_from_board (board : Game_logic.boardt) = 
+let build_html_from_board (board : Game_logic.boardt) gametype = 
   (*
     build a html page from a [stone list list]
    *)
@@ -68,7 +105,7 @@ let build_html_from_board (board : Game_logic.boardt) =
   </head>
   <body>
     <script>
-        let socket = new WebSocket(\"ws://\" + window.location.host + \"/websocket\");
+        let socket = new WebSocket(\"ws://\" + window.location.host + \"/websocket/%s\");
         var coord_pair = [];
         function piece_clicked(i,j){
             console.log(coord_pair.length);
@@ -290,4 +327,5 @@ let build_html_from_board (board : Game_logic.boardt) =
   </body>
   "
   css_str
+  gametype
   board_str

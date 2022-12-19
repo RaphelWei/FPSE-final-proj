@@ -10,16 +10,17 @@
  (libraries libgame)
 )
 
+
 (executable
- (name server)
- (modules server)
+ (name web_ai)
+ (modules web_ai)
  (libraries libgame dream)
  (preprocess (pps lwt_ppx))
 )
 
 (executable
- (name web_ai)
- (modules web_ai)
+ (name all)
+ (modules all)
  (libraries libgame dream)
  (preprocess (pps lwt_ppx))
 )
