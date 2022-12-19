@@ -26,7 +26,7 @@
 ; See the complete stanza docs at https://dune.readthedocs.io/en/stable/dune-files.html#dune-project
 
 (generate_opam_files true)
-(authors "Jiarui Wang, Sihan Wei, Yilin Zhou")
+(authors "Jiarui Wang, Sihan Wei, Yilin Chen")
 (maintainers "none")
 (package
  (name Chess) ; put in your own project name here
